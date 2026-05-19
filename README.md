@@ -10,7 +10,7 @@ A simple utility to convert and/or transfer music files.
 
 1. ***REQUIRED!*** Download and install [ffmpeg](https://ffmpeg.org/download.html)
 2. Either:
-	- Any platform: download repository run main.py
+	- Any platform: download repository and run `main.py`
 	- Windows Only: download the [latest release](https://github.com/ElerosVecchio/y1-transfer-util/releases/latest) and run the executable
 
 ### How To Use
@@ -22,3 +22,5 @@ A simple utility to convert and/or transfer music files.
 >
 > Note: Non-embedded album artwork will ***always*** be converted to 500x500px BMP for compatibility with Rockbox
 4. Click Start!
+
+##### This project uses [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) which is licensed under the Apache 2.0 Software License
