@@ -1,7 +1,7 @@
 # Y1 Transfer Utility
 
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue?label=version)](https://github.com/ElerosVecchio/y1-transfer-util/releases/tag/v1.0.0)
-![License](https://img.shields.io/badge/license-MIT%20License-lightgrey?label=version)
+[![Version](https://img.shields.io/badge/version-v1.0.0-blue)](https://github.com/ElerosVecchio/y1-transfer-util/releases/tag/v1.0.0)
+![License](https://img.shields.io/badge/license-MIT%20License-lightgrey)
 [![Support](https://img.shields.io/badge/support-Kofi-orange?logo=kofi)](https://ko-fi.com/roguespassage)
 
 A simple utility to convert and/or transfer music files.
