@@ -58,7 +58,7 @@ def output_dialog():
 if __name__ == "__main__":
     # Create Tk Root Window
     root = tk.Tk()
-    root.title("Y1 Transfer Utility (v1.0)")
+    root.title("Y1 Transfer Utility (v1.0.0)")
 
     # Window Size and Positioning
     window_width = 600
