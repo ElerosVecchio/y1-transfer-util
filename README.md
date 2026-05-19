@@ -17,7 +17,7 @@ A simple utility to convert and/or transfer music files.
 
 1. Enter or Browse for your existing music library (Input Folder)
 2. Enter or Browse for the destination (Output Folder)
-3. Check the checkbox to export music files as 320kb MP3
+3. Check the checkbox to export music files as 320kbps MP3
 > Leaving this unchecked will directly copy the source files. Conversion keeps metadata intact.
 >
 > Note: Non-embedded album artwork will be converted to 500x500 BMP no matter what for compatibility with Rockbox
