@@ -1,14 +1,14 @@
 # Y1 Transfer Utility
 
 [![Version](https://img.shields.io/badge/version-v1.0.0-blue)](https://github.com/ElerosVecchio/y1-transfer-util/releases/tag/v1.0.0)
-![License](https://img.shields.io/badge/license-MIT%20License-lightgrey)
+[![License](https://img.shields.io/badge/license-MIT%20License-lightgrey)](https://github.com/ElerosVecchio/y1-transfer-util/tree/main?tab=MIT-1-ov-file)
 [![Support](https://img.shields.io/badge/support-Kofi-orange?logo=kofi)](https://ko-fi.com/roguespassage)
 
 A simple utility to convert and/or transfer music files.
 
 ### Installation
 
-1. Download and install ***REQUIRED!*** [ffmpeg](https://ffmpeg.org/download.html)
+1. ***REQUIRED!*** Download and install [ffmpeg](https://ffmpeg.org/download.html)
 2. Either:
 	- Any platform: download repository run main.py
 	- Windows Only: download the [latest release](https://github.com/ElerosVecchio/y1-transfer-util/releases/latest) and run the executable
