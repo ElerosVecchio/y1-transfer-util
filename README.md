@@ -4,14 +4,19 @@
 [![License](https://img.shields.io/badge/license-MIT%20License-lightgrey)](https://github.com/ElerosVecchio/y1-transfer-util/blob/main/LICENSE)
 [![Support](https://img.shields.io/badge/support-Kofi-orange?logo=kofi)](https://ko-fi.com/roguespassage)
 
-A simple utility to convert and/or transfer music files.
+A simple utility to convert and/or transfer music files and album art.
 
 ### Installation
 
 1. ***REQUIRED!*** Download and install [ffmpeg](https://ffmpeg.org/download.html)
 2. Either:
-	- Any platform: download repository and run `main.py`
-	- Windows Only: download the [latest release](https://github.com/ElerosVecchio/y1-transfer-util/releases/latest) and run the executable
+	- **Windows Only**: download the [latest release](https://github.com/ElerosVecchio/y1-transfer-util/releases/latest) and run the executable
+ 	- Any platform:
+		1. Install the [latest Python version](https://www.python.org/downloads/)
+		2. Install [ffmpeg-python](https://github.com/kkroening/ffmpeg-python)
+		3. Download this repository and run `main.py`
+
+> Note: This project relies on Tkinter. This is usually installed alongside Python, but if not you may need to install it seperately.
 
 ### How To Use
 
