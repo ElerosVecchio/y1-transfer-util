@@ -1,6 +1,6 @@
 # Y1 Transfer Utility
 
-[![Version](https://img.shields.io/badge/version-v1.0.0-blue)](https://github.com/ElerosVecchio/y1-transfer-util/releases/tag/v1.0.0)
+[![Version](https://img.shields.io/badge/version-v1.0.1-blue)](https://github.com/ElerosVecchio/y1-transfer-util/releases/tag/v1.0.1)
 [![License](https://img.shields.io/badge/license-MIT%20License-lightgrey)](https://github.com/ElerosVecchio/y1-transfer-util/tree/main?tab=MIT-1-ov-file)
 [![Support](https://img.shields.io/badge/support-Kofi-orange?logo=kofi)](https://ko-fi.com/roguespassage)
 

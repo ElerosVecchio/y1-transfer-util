@@ -1,4 +1,5 @@
 import os
+import sys
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter import ttk
@@ -55,10 +56,19 @@ def output_dialog():
     output_file_string.set(directory)
 
 
+def icon_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
 if __name__ == "__main__":
     # Create Tk Root Window
     root = tk.Tk()
-    root.title("Y1 Transfer Utility (v1.0.0)")
+    root.title("Y1 Transfer Utility (v1.0.1)")
+    root.iconbitmap(icon_path("icon.ico"))
 
     # Window Size and Positioning
     window_width = 600
