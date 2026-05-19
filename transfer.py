@@ -6,18 +6,6 @@ from pathlib import Path
 import ffmpeg
 
 
-def image_transfer(destination, root_dir, source_prefix, file):
-    ndst = str(
-        Path(os.path.join(destination, root_dir[source_prefix:], file)).with_suffix(
-            ".bmp"
-        )
-    )
-    if not os.path.isfile(ndst):
-        ffmpeg.input(os.path.join(root_dir, file)).output(ndst, vf="scale=500:500").run(
-            quiet=True
-        )
-
-
 def start_thread(
     input_file_string,
     output_file_string,
