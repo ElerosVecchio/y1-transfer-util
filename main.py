@@ -1,30 +1,15 @@
 import os
 import sys
+import threading
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter import ttk
-from tkinter.messagebox import showerror
+from tkinter.messagebox import askyesno, showerror, showinfo
 
 import transfer
 
 
-def start_transfer():
-    """Starts the transfer process after checking paths and disabling fields"""
-
-    if not os.path.isdir(input_file_string.get()):
-        showerror(title="Error", message="Input Path is Invalid")
-        return
-    if not os.path.isdir(output_file_string.get()):
-        showerror(title="Error", message="Output Path is Invalid")
-        return
-
-    src = os.path.abspath(input_file_string.get())
-    dst = os.path.abspath(output_file_string.get())
-
-    if src == dst:
-        showerror(title="Error", message="Input and Output Paths Are The Same")
-        return
-
+def disable_input():
     input_entry["state"] = "disabled"
     input_browse["state"] = "disabled"
     output_entry["state"] = "disabled"
@@ -32,14 +17,60 @@ def start_transfer():
     convert_checkbox["state"] = "disabled"
     start_button["state"] = "disabled"
 
-    transfer.start_thread(
-        input_file_string,
-        output_file_string,
-        convert_bool,
-        status_label,
-        progress,
-        root,
+
+def enable_input():
+    input_entry["state"] = "enabled"
+    input_browse["state"] = "enabled"
+    output_entry["state"] = "enabled"
+    output_browse["state"] = "enabled"
+    convert_checkbox["state"] = "enabled"
+    start_button["state"] = "enabled"
+
+
+def finished_transfer(transferred, skipped):
+    status_label.config(
+        {"text": f"Done! {transferred} transferred, {skipped} skipped"},
     )
+    showinfo(
+        title="Transfer Completed",
+        message=f"Done! {transferred} transferred, {skipped} skipped",
+    )
+    enable_input()
+
+
+def start_transfer():
+    """Starts the transfer process after checking paths and disabling fields"""
+
+    src = os.path.abspath(input_file_string.get())
+    dst = os.path.abspath(output_file_string.get())
+
+    if not os.path.isdir(src):
+        showerror(title="Error", message="Input Path is not a Directory")
+        return
+    if not os.path.isdir(dst):
+        showerror(title="Error", message="Output Path is not a Directory")
+        return
+
+    if src == dst:
+        if not askyesno(
+            title="Same Paths", message="Input and Output Paths are the same, continue?"
+        ):
+            return
+
+    disable_input()
+    thread = threading.Thread(
+        target=transfer.transfer_loop,
+        args=(
+            src,
+            dst,
+            convert_bool.get(),
+            status_label,
+            progress,
+            root,
+            finished_transfer,
+        ),
+    )
+    thread.start()
 
 
 def input_dialog():

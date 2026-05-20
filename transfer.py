@@ -1,43 +1,19 @@
 import os
 import shutil
-import threading
 from pathlib import Path
 
 import ffmpeg
 
 
-def start_thread(
-    input_file_string,
-    output_file_string,
-    convert_bool,
-    status,
-    progress_bar,
-    root_window,
-):
-    thread = threading.Thread(
-        target=transfer_loop,
-        args=(
-            input_file_string,
-            output_file_string,
-            convert_bool,
-            status,
-            progress_bar,
-            root_window,
-        ),
-    )
-    thread.start()
-
-
 def transfer_loop(
-    input_file_string,
-    output_file_string,
-    convert_bool,
+    src,
+    dst,
+    do_convert,
     status,
     progress_bar,
     root_window,
+    callback_func,
 ):
-    src = os.path.abspath(input_file_string.get())
-    dst = os.path.abspath(output_file_string.get())
 
     progress_bar.after(0, progress_bar.config, {"mode": "indeterminate"})
     status.after(0, status.config, {"text": "Estimating number of files..."})
@@ -113,7 +89,7 @@ def transfer_loop(
                 )
             ):
                 # supported audio files
-                if not convert_bool.get():
+                if not do_convert:
                     # Copy files, no conversion to MP3
                     ndst = os.path.join(dst, rootdir[src_prefix:], f)
                     if not os.path.isfile(ndst):
@@ -154,8 +130,4 @@ def transfer_loop(
             except FileExistsError:
                 pass
 
-    status.after(
-        0,
-        status.config,
-        {"text": f"Done! {files_transferred} transferred, {files_skipped} skipped"},
-    )
+    callback_func(files_transferred, files_skipped)
