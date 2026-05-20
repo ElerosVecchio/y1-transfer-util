@@ -6,6 +6,8 @@
 
 A simple utility to convert and/or transfer music files and album art.
 
+---
+
 ### Installation
 
 1. ***REQUIRED!*** Download and install [ffmpeg](https://ffmpeg.org/download.html)
@@ -18,6 +20,8 @@ A simple utility to convert and/or transfer music files and album art.
 
 > Note: This project relies on Tkinter. This is usually installed alongside Python, but if not you may need to install it seperately.
 
+---
+
 ### How To Use
 
 1. Enter or Browse for your existing music library (Input Folder)
@@ -27,5 +31,32 @@ A simple utility to convert and/or transfer music files and album art.
 >
 > Note: Non-embedded album artwork will ***always*** be converted to 500x500px BMP for compatibility with Rockbox
 4. Click Start!
+
+---
+
+### Supported Formats
+
+**Images (Album Art)**
+- JPEG
+- PNG
+- WEBP
+- GIF
+- TIFF
+- BMP
+
+**Audio**
+- AAC
+- ALAC
+- AIFF
+- DSD
+- FLAC
+- MP3
+- OGG
+- WAV
+
+> My library is almost entirely FLAC files so that is what I'm easily able to test.
+> If the program crashes or skips your files, open a new [issue](https://github.com/ElerosVecchio/y1-transfer-util/issues)
+
+---
 
 ##### This project uses [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) which is licensed under the Apache 2.0 Software License

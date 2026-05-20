@@ -53,6 +53,7 @@ def transfer_loop(
 
     current_file = 0
     files_transferred = 0
+    files_skipped = 0
 
     # copy tree
     src_prefix = len(src) + len(os.path.sep)
@@ -78,7 +79,6 @@ def transfer_loop(
                     ".webp",
                     ".bmp",
                     ".tiff",
-                    ".tga",
                     ".gif",
                 )
             ):
@@ -87,31 +87,49 @@ def transfer_loop(
                 )
                 if not os.path.isfile(ndst):
                     ffmpeg.input(os.path.join(rootdir, f)).output(
-                        ndst, vf="scale=500:500"
+                        ndst, update="true", vframes=1, vf="scale=500:500"
                     ).run(quiet=True)
                     files_transferred += 1
 
-            if not convert_bool.get():
-                # Copy files, no conversion to MP3
-                if f.lower().endswith(
-                    (".mp3", ".wav", ".flac", ".ogg", ".aac", ".alac", ".dsd")
-                ):
+            elif f.lower().endswith(
+                (
+                    ".3gp",
+                    ".aac",
+                    ".adts",
+                    ".m4a",
+                    ".mp4",
+                    ".caf",
+                    ".aiff",
+                    ".aif",
+                    ".wsd",
+                    ".dsf",
+                    ".flac",
+                    ".mp3",
+                    ".ogg",
+                    ".oga",
+                    ".spx",
+                    ".wav",
+                    ".wave",
+                )
+            ):
+                # supported audio files
+                if not convert_bool.get():
+                    # Copy files, no conversion to MP3
                     ndst = os.path.join(dst, rootdir[src_prefix:], f)
                     if not os.path.isfile(ndst):
                         shutil.copy2(os.path.join(rootdir, f), ndst)
                         files_transferred += 1
-            else:
-                # Convert files to MP3
-                if f.lower().endswith(
-                    (".mp3", ".wav", ".flac", ".ogg", ".aac", ".alac", ".dsd")
-                ):
+                    else:
+                        files_skipped += 1
+                else:
+                    # Convert files to MP3
                     ndst = str(
                         Path(os.path.join(dst, rootdir[src_prefix:], f)).with_suffix(
                             ".mp3"
                         )
                     )
                     if not os.path.isfile(ndst):
-                        ffmpeg.input(os.path.join(rootdir, f)).output(
+                        ffmpeg.input(os.path.join(rootdir, f)).audio.output(
                             ndst,
                             ab="320k",
                             ac=2,
@@ -121,6 +139,10 @@ def transfer_loop(
                             write_id3v1=1,
                         ).run(quiet=True)
                         files_transferred += 1
+                    else:
+                        files_skipped += 1
+            else:
+                files_skipped += 1
 
             current_file += 1
 
@@ -132,4 +154,8 @@ def transfer_loop(
             except FileExistsError:
                 pass
 
-    status.after(0, status.config, {"text": f"Done! {files_transferred} transferred"})
+    status.after(
+        0,
+        status.config,
+        {"text": f"Done! {files_transferred} transferred, {files_skipped} skipped"},
+    )
