@@ -59,4 +59,11 @@ A simple utility to convert and/or transfer music files and album art.
 
 ---
 
+### Roadmap
+
+- Exclude list
+- More conversion settings
+
+---
+
 ##### This project uses [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) which is licensed under the Apache 2.0 Software License
