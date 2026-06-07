@@ -63,6 +63,7 @@ A simple utility to convert and/or transfer music files and album art.
 
 - Exclude list
 - More conversion settings
+- Move to PyQT
 
 ---
 
