@@ -9,6 +9,7 @@ def transfer_loop(
     src,
     dst,
     do_convert,
+    copy_embed_cover,
     status,
     progress_bar,
     root_window,
@@ -105,16 +106,30 @@ def transfer_loop(
                         )
                     )
                     if not os.path.isfile(ndst):
-                        ffmpeg.input(os.path.join(rootdir, f)).audio.output(
-                            ndst,
-                            ab="320k",
-                            ac=2,
-                            ar=48000,
-                            map_metadata=0,
-                            id3v2_version=3,
-                            write_id3v1=1,
-                        ).run(quiet=True)
+                        output_bitrate = 320000
+                        if copy_embed_cover:
+                            ffmpeg.input(os.path.join(rootdir, f)).output(
+                                ndst,
+                                ab=output_bitrate,
+                                ac=2,
+                                ar=48000,
+                                map_metadata=0,
+                                id3v2_version=3,
+                                write_id3v1=1,
+                                vcodec="copy"
+                            ).run(quiet=True)
+                        else:
+                            ffmpeg.input(os.path.join(rootdir, f)).audio.output(
+                                ndst,
+                                ab=output_bitrate,
+                                ac=2,
+                                ar=48000,
+                                map_metadata=0,
+                                id3v2_version=3,
+                                write_id3v1=1
+                            ).run(quiet=True)
                         files_transferred += 1
+                        print(type(ffmpeg.probe(ndst)))
                     else:
                         files_skipped += 1
             else:
