@@ -99,7 +99,7 @@ def icon_path(relative_path):
 if __name__ == "__main__":
     # Create Tk Root Window
     root = tk.Tk()
-    root.title("Y1 Transfer Utility (v1.1.0)")
+    root.title("Y1 Transfer Utility (v1.2.0)")
     root.iconbitmap(icon_path("icon.ico"))
 
     # Window Size and Positioning
