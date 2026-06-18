@@ -107,6 +107,9 @@ def transfer_loop(
                     )
                     if not os.path.isfile(ndst):
                         output_bitrate = 320000
+                        input_probe = ffmpeg.probe(os.path.join(rootdir, f))
+                        if "bit_rate" in input_probe["format"]:
+                            output_bitrate = min(output_bitrate, int(input_probe["format"]["bit_rate"]))
                         if copy_embed_cover:
                             ffmpeg.input(os.path.join(rootdir, f)).output(
                                 ndst,
