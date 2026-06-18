@@ -64,6 +64,7 @@ def start_transfer():
             src,
             dst,
             convert_bool.get(),
+            copy_embed_cover_bool.get(),
             status_label,
             progress,
             root,
@@ -98,7 +99,7 @@ def icon_path(relative_path):
 if __name__ == "__main__":
     # Create Tk Root Window
     root = tk.Tk()
-    root.title("Y1 Transfer Utility (v1.1.0)")
+    root.title("Y1 Transfer Utility (v1.2.0)")
     root.iconbitmap(icon_path("icon.ico"))
 
     # Window Size and Positioning
@@ -125,6 +126,7 @@ if __name__ == "__main__":
     input_file_string = tk.StringVar()
     output_file_string = tk.StringVar()
     convert_bool = tk.BooleanVar()
+    copy_embed_cover_bool = tk.BooleanVar()
 
     # Input Fields (Row 0)
     input_label = ttk.Label(root, text="Input Folder:")
@@ -146,7 +148,10 @@ if __name__ == "__main__":
     convert_checkbox = ttk.Checkbutton(
         root, text="Convert music to MP3?", variable=convert_bool
     )
-    convert_checkbox.grid(column=1, columnspan=3, row=2, sticky=tk.EW)
+    copy_embed_cover_checkbox = ttk.Checkbutton(root, text="Copy Embedded Cover? (Conversion Only)", variable=copy_embed_cover_bool)
+    copy_embed_cover_bool.set(True)
+    convert_checkbox.grid(column=1, columnspan=1, row=2, sticky=tk.EW)
+    copy_embed_cover_checkbox.grid(column=2, columnspan=2, row=2, sticky=tk.EW)
 
     # Progress Bar (Row 3)
     progress = ttk.Progressbar(root, orient="horizontal", mode="determinate")
