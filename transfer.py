@@ -6,8 +6,10 @@ import json
 
 import ffmpeg
 
+
 def ffmpeg_noconsole(ffmpeg_command):
     subprocess.call(ffmpeg_command, shell=True)
+
 
 def ffmpeg_probe(video_input_path):
     command = ['ffprobe', '-show_format', '-show_streams', '-of', 'json']
@@ -25,6 +27,7 @@ def ffmpeg_probe(video_input_path):
         raise Exception(f"ffprobe error: {err}")
 
     return json.loads(out.decode('utf-8'))
+
 
 def transfer_loop(
     src,
@@ -72,7 +75,8 @@ def transfer_loop(
                 )
             ):
                 ndst = str(
-                    Path(os.path.join(dst, rootdir[src_prefix:], f)).with_suffix(".bmp")
+                    Path(os.path.join(dst, rootdir[src_prefix:], f)).with_suffix(
+                        ".bmp")
                 )
                 if not os.path.isfile(ndst):
                     ffmpeg_noconsole(ffmpeg.input(os.path.join(rootdir, f)).output(
@@ -121,7 +125,8 @@ def transfer_loop(
                         output_bitrate = 320000
                         input_probe = ffmpeg_probe(os.path.join(rootdir, f))
                         if "bit_rate" in input_probe["format"]:
-                            output_bitrate = min(output_bitrate, int(input_probe["format"]["bit_rate"]))
+                            output_bitrate = min(output_bitrate, int(
+                                input_probe["format"]["bit_rate"]))
                         if copy_embed_cover:
                             ffmpeg_noconsole(ffmpeg.input(os.path.join(rootdir, f)).output(
                                 ndst,

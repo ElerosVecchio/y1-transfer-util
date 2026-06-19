@@ -148,7 +148,8 @@ if __name__ == "__main__":
     convert_checkbox = ttk.Checkbutton(
         root, text="Convert music to MP3?", variable=convert_bool
     )
-    copy_embed_cover_checkbox = ttk.Checkbutton(root, text="Copy Embedded Cover? (Conversion Only)", variable=copy_embed_cover_bool)
+    copy_embed_cover_checkbox = ttk.Checkbutton(
+        root, text="Copy Embedded Cover? (Conversion Only)", variable=copy_embed_cover_bool)
     copy_embed_cover_bool.set(True)
     convert_checkbox.grid(column=1, columnspan=1, row=2, sticky=tk.EW)
     copy_embed_cover_checkbox.grid(column=2, columnspan=2, row=2, sticky=tk.EW)
