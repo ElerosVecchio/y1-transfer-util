@@ -58,6 +58,8 @@ def start_transfer():
         ):
             return
 
+    excluded = exclude_text.get('1.0', 'end').split('\n')
+
     disable_input()
     thread = threading.Thread(
         target=transfer.transfer_loop,
@@ -69,6 +71,7 @@ def start_transfer():
             status_label,
             progress,
             root,
+            excluded,
             finished_transfer,
         ),
     )
@@ -89,16 +92,33 @@ def output_dialog():
     output_file_string.set(directory)
 
 
-def exclude_open_dialog():
-    pass
+def exclude_add_files_dialog():
+    filenames = fd.askopenfilenames()
+    for x in filenames:
+        exclude_text.insert("end", f'{os.path.abspath(x)}\n')
+
+
+def exclude_add_dirs_dialog():
+    dirname = fd.askdirectory()
+    if dirname != "":
+        exclude_text.insert("end", f'{os.path.abspath(dirname)}\n')
 
 
 def exclude_save_dialog():
-    pass
+    file = fd.asksaveasfile(initialdir=".", initialfile="excludelist.txt", filetypes=[
+                            ("Text Documents", "*.txt")])
+    if file:
+        file.write(exclude_text.get("1.0", "end"))
+        file.close()
 
 
 def exclude_load_dialog():
-    pass
+    file = fd.askopenfile(filetypes=[("Text Documents", "*.txt")])
+    if file:
+        exclude_text.delete('1.0', 'end')
+        exclude_text.insert('1.0', file.read())
+        exclude_text.delete('end -1 chars', 'end')
+        file.close()
 
 
 def icon_path(relative_path):
@@ -107,6 +127,22 @@ def icon_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
+
+
+def create_exclude_frame(root):
+    tmp = ttk.Frame(root)
+    exclude_open_file = ttk.Button(tmp, text="Add Files...",
+                                   command=exclude_add_files_dialog)
+    exclude_open_dirs = ttk.Button(tmp, text="Add Folder...",
+                                   command=exclude_add_dirs_dialog)
+    exclude_save = ttk.Button(tmp, text="Save", command=exclude_save_dialog)
+    exclude_load = ttk.Button(tmp, text="Load", command=exclude_load_dialog)
+    exclude_open_file.pack(expand=True)
+    exclude_open_dirs.pack(expand=True)
+    exclude_save.pack(expand=True)
+    exclude_load.pack(expand=True)
+
+    return tmp
 
 
 if __name__ == "__main__":
@@ -167,17 +203,13 @@ if __name__ == "__main__":
 
     # Exclude Fields (Rows 2 - 5)
     exclude_label = ttk.Label(root, text="Exclude:")
-    exclude_text = scrolledtext.ScrolledText(root, width=1, height=1)
-    exclude_open = ttk.Button(root, text="Open...",
-                              command=exclude_open_dialog)
-    exclude_save = ttk.Button(root, text="Save", command=exclude_save_dialog)
-    exclude_load = ttk.Button(root, text="Load", command=exclude_load_dialog)
+    exclude_text = scrolledtext.ScrolledText(
+        root, width=1, height=1, wrap="none")
     exclude_label.grid(column=0, row=2, sticky=tk.E, padx=2)
     exclude_text.grid(column=1, columnspan=2, row=2,
                       rowspan=4, sticky=tk.NSEW, padx=2)
-    exclude_open.grid(column=0, row=3, sticky=tk.SE, padx=2)
-    exclude_save.grid(column=0, row=4, sticky=tk.SE, padx=2)
-    exclude_load.grid(column=0, row=5, sticky=tk.SE, padx=2)
+    exclude_frame = create_exclude_frame(root)
+    exclude_frame.grid(column=0, row=5, sticky=tk.SE, padx=2)
 
     # Separator
     sep = ttk.Separator(root, orient=tk.VERTICAL)
