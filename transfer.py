@@ -37,6 +37,7 @@ def transfer_loop(
     status,
     progress_bar,
     root_window,
+    excluded,
     callback_func,
 ):
 
@@ -56,12 +57,30 @@ def transfer_loop(
     files_transferred = 0
     files_skipped = 0
 
+    print(excluded)
+
     # copy tree
     src_prefix = len(src) + len(os.path.sep)
 
     for rootdir, dirs, files in library:
         for f in files:
-            # Check if its and image, then convert
+            # Check for excluded files/dirs
+            srcpath = os.path.join(rootdir, f)
+            print(srcpath)
+            found = False
+            for x in excluded:
+                if x == '':
+                    continue
+                x_len = len(x)
+                print(f'{x.lower()} !! {srcpath.lower()[:x_len]}')
+                if x.lower() == srcpath.lower()[:x_len]:
+                    found = True
+                    break
+            if found == True:
+                files_skipped += 1
+                continue
+
+            # Check if its an image, then convert
             # Images are always converted to BMP for compatibility with Rockbox
             if f.lower().endswith(
                 (
@@ -167,6 +186,19 @@ def transfer_loop(
 
         # Create subdirectories if they dont exist
         for dirname in dirs:
+            srcpath = os.path.join(rootdir, dirname)
+            # Check for excluded files/dirs
+            found = False
+            for x in excluded:
+                if x == '':
+                    continue
+                x_len = len(x)
+                if x.lower() == srcpath.lower()[:x_len]:
+                    found = True
+                    break
+            if found == True:
+                continue
+
             dirpath = os.path.join(dst, rootdir[src_prefix:], dirname)
             try:
                 os.mkdir(dirpath)
