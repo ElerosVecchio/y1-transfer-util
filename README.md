@@ -62,7 +62,7 @@ A simple utility to convert and/or transfer music files and album art.
 ### Roadmap
 
 - ~~Smart bitrate conversion~~
-- Exclude list
+- ~~Exclude list~~
 - More conversion settings
 
 ---
