@@ -12,7 +12,7 @@ A simple utility to convert and/or transfer music files and album art.
 
 1. ***REQUIRED!*** Download and install [ffmpeg](https://ffmpeg.org/download.html)
 2. Either:
-	- **Windows Only**: download the [latest release](https://github.com/ElerosVecchio/y1-transfer-util/releases/latest) and run the executable
+	- **Windows and Linux**: Download the [latest release](https://github.com/ElerosVecchio/y1-transfer-util/releases/latest) and run the executable
  	- Any platform:
 		1. Install the [latest Python version](https://www.python.org/downloads/)
 		2. Install [ffmpeg-python](https://github.com/kkroening/ffmpeg-python)
