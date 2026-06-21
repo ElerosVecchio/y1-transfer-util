@@ -148,8 +148,8 @@ def create_exclude_frame(root):
 if __name__ == "__main__":
     # Create Tk Root Window
     root = tk.Tk()
-    root.title("Y1 Transfer Utility (v1.3.0)")
-    root.iconbitmap(icon_path("icon.ico"))
+    root.title("Y1 Transfer Utility (v1.3.1)")
+    root.iconphoto(True, tk.PhotoImage(file=icon_path("icon.png")))
 
     # Window Size and Positioning
     window_width = 1000
