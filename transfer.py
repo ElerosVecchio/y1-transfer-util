@@ -166,7 +166,7 @@ def transfer_loop(
                                 map_metadata=0,
                                 id3v2_version=3,
                                 write_id3v1=1
-                            ).run())
+                            ).compile())
                         files_transferred += 1
                     else:
                         files_skipped += 1
