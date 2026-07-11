@@ -6,6 +6,8 @@
 
 A simple utility to convert and/or transfer music files and album art.
 
+![Utility GUI Preview](https://github.com/ElerosVecchio/y1-transfer-util/blob/main/preview.png)
+
 ---
 
 ### Installation
