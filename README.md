@@ -20,6 +20,7 @@ A simple utility to convert and/or transfer music files and album art.
 		2. Install [ffmpeg-python](https://github.com/kkroening/ffmpeg-python)
 		3. Download this repository and run `main.py`
 
+> Mac is not officially supported as I cannot test on it. However, it is just a python project so it ***should*** work.
 > Note: This project relies on Tkinter. This is usually installed alongside Python, but if not you may need to install it separately.
 
 ---
